@@ -319,6 +319,7 @@ struct yabar_gen_info {
 	uint32_t curws;
 	uint32_t lstws;
 	ya_ewmh_blk *ewmh_blk;
+	xcb_atom_t hints;
 #endif //YA_INTERNAL_EWMH
 };
 typedef struct yabar_gen_info yabar_info_t;
