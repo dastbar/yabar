@@ -36,7 +36,8 @@ struct reserved_blk ya_reserved_blks[YA_INTERNAL_LEN] = {
 	{"YABAR_VOLUME", ya_int_volume},
 #ifdef YA_INTERNAL_EWMH
 	{"YABAR_TITLE", NULL},
-	{"YABAR_WORKSPACE", NULL}
+	{"YABAR_WORKSPACE", NULL},
+	{"YABAR_WORKSPACES", NULL}
 #endif
 };
 

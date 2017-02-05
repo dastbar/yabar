@@ -119,7 +119,7 @@ enum {
 
 
 #ifdef YA_INTERNAL_EWMH
-#define YA_INTERNAL_LEN 14
+#define YA_INTERNAL_LEN 15
 #else
 #define YA_INTERNAL_LEN 12
 #endif
@@ -137,7 +137,8 @@ enum {
 	YA_INT_BATTERY,
 	YA_INT_VOLUME,
 	YA_INT_TITLE,
-	YA_INT_WORKSPACE
+	YA_INT_WORKSPACE,
+	YA_INT_WORKSPACES
 };
 
 #define NOT_INHERIT_BAR(bar) (((bar)->attr & BARA_INHERIT)==0)
