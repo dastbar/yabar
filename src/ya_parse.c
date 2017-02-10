@@ -246,9 +246,26 @@ static void ya_setup_bar(config_setting_t * set) {
 	else {
 		if((ya.gen_flag & GEN_RANDR)) {
 			bar->mon = ya_get_monitor_from_name(retstr);
-			//If null, fall back to the first active monitor
-			if(bar->mon == NULL)
+			//If specified but not found, fall back to the first active monitor
+			if(bar->mon == NULL) {
+#ifdef YA_MONS
+			//if fallback is found, use that monitor instead
+			retcnf = config_setting_lookup_string(set, "monitor-fallback", &retstr);
+			if(retcnf == CONFIG_TRUE) {
+				if((ya.gen_flag & GEN_RANDR)) {
+					fprintf(stderr, "Reverting to fallback monitor %s\n", retstr);
+					bar->mon = ya_get_monitor_from_name(retstr);
+				}
+			}
+			else {
+#endif //YA_MONS
+				//if still not found, use first active monitor
 				for(bar->mon= ya.curmon; bar->mon->prev_mon; bar->mon = bar->mon->prev_mon);
+#ifdef YA_MONS
+			}
+#endif //YA_MONS
+
+			}
 		}
 	}
 

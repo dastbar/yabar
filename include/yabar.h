@@ -303,6 +303,8 @@ enum {
 
 struct yabar_gen_info {
 	xcb_connection_t *c;
+	//potentially useful for XEMBED tray
+	int scr_num;
 	xcb_screen_t *scr;
 	xcb_visualtype_t *visualtype;
 	xcb_colormap_t colormap;
@@ -319,6 +321,10 @@ struct yabar_gen_info {
 	uint32_t lstws;
 	ya_ewmh_blk *ewmh_blk;
 #endif //YA_INTERNAL_EWMH
+#ifdef YA_MONS
+	char **argv;
+	int xrandr_offset;
+#endif //YA_MONS
 };
 typedef struct yabar_gen_info yabar_info_t;
 
@@ -345,6 +351,7 @@ ya_block_t * ya_get_blk_from_event( xcb_button_press_event_t *eb);
 void ya_get_cur_window_title(ya_block_t * blk);
 void ya_handle_button( xcb_button_press_event_t *eb);
 void ya_handle_prop_notify(xcb_property_notify_event_t *ep);
+void ya_handle_screen_change(xcb_randr_screen_change_notify_event_t *ev);
 
 cairo_surface_t * ya_draw_graphics(ya_block_t *blk);
 void ya_redraw_bar(ya_bar_t *bar);

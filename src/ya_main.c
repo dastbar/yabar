@@ -19,7 +19,14 @@ int main (int argc, char * argv[]) {
 
 	xcb_generic_event_t *ev;
 	while((ev = xcb_wait_for_event(ya.c))) {
-		switch(ev->response_type & ~0x80) {
+		uint8_t type = ev->response_type & ~0x80;
+#ifdef YA_MONS
+		if(type == ya.xrandr_offset + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {
+			ya_handle_screen_change((xcb_randr_screen_change_notify_event_t *) ev);
+		}
+		else {
+#endif //YA_MONS
+		switch(type) {
 #ifdef YA_INTERNAL_EWMH
 			case XCB_PROPERTY_NOTIFY: {
 				ya_handle_prop_notify((xcb_property_notify_event_t *) ev);
@@ -39,7 +46,10 @@ int main (int argc, char * argv[]) {
 				}
 				break;
 			}
+			}
+#ifdef YA_MONS
 		}
+#endif //YA_MONS
 		free(ev);
 	}
 	//shouldn't get here

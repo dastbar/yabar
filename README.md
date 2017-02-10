@@ -105,10 +105,10 @@ Each bar can have its font, position (currently only top and bottom), background
 
 		width: 800;
 
-* Monitor: This option is used to specify the monitor using randr extension for the bar to be drawn on. You can find the name of your monitors using `xrandr -q` command. The default value is the first active monitor. Example:
+* Monitor: This option is used to specify the monitor using randr extension for the bar to be drawn on. You can find the name of your monitors using `xrandr -q` command. The default value is the first active monitor. A fallback monitor can be provided if the first option is unavailable. Example:
 
 		monitor: "LVDS1";
-		monitor: "VGA1";
+		monitor-fallback: "VGA1";
 
 * Underline and overline sizes: This option defines the thickness of underlines and overlines. Default is 0. Example:
 
